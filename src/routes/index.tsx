@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Compass, Route as RouteIcon, RefreshCw, LayoutDashboard, ArrowRight } from "lucide-react";
-import gilvanAsset from "@/assets/gilvan.png.asset.json";
-import thalitaAsset from "@/assets/thalita.png.asset.json";
+import gilvanFoto from "@/assets/foto-gilvan-genos-exclusivo-clinicas.png";
+import thalitaFoto from "@/assets/foto-thalita-genos-exclusivo-clinicas.png";
 
 const WHATSAPP_URL = "https://wa.me/5521985237650?text=Oi!%20Vim%20pela%20p%C3%A1gina%20da%20Genos%20e%20quero%20destravar%20minha%20cl%C3%ADnica.";
 
@@ -188,7 +188,7 @@ function youtubeId(input?: string) {
 
 const founders = [
   {
-    foto: gilvanAsset.url,
+    foto: gilvanFoto,
     nome: "Gilvan Brito",
     pos: "center 20%",
     scale: 1,
@@ -196,7 +196,7 @@ const founders = [
       "Mais de uma década no comercial. Treinou mais de 5.000 vendedores e liderou equipes de mais de 600 pessoas. É ele quem senta com você: organiza os processos, alinha e motiva a equipe e põe o comercial da clínica pra funcionar.",
   },
   {
-    foto: thalitaAsset.url,
+    foto: thalitaFoto,
     nome: "Thalita Azeredo",
     pos: "center 15%",
     scale: 1.18,
