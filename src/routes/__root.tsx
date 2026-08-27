@@ -99,9 +99,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      // Marca da Genos sobre fundo escuro: o "g" é branco e sumiria num ícone claro.
+      // Ícones de aba com fundo transparente. O apple-touch-icon é a exceção:
+      // o iOS pinta a transparência de preto, e o "g" da marca é preto — por
+      // isso esse vai com fundo branco.
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32.png" },
+      { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48.png" },
       { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
     ],
   }),

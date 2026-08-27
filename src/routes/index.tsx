@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Compass, Route as RouteIcon, RefreshCw, LayoutDashboard, ArrowRight } from "lucide-react";
-import gilvanFoto from "@/assets/foto-gilvan-genos-exclusivo-clinicas.png";
-import thalitaFoto from "@/assets/foto-thalita-genos-exclusivo-clinicas.png";
+import gilvanFoto from "@/assets/foto-gilvan-genos-exclusivo-clinicas.webp";
+import thalitaFoto from "@/assets/foto-thalita-genos-exclusivo-clinicas.webp";
 
 const WHATSAPP_URL = "https://wa.me/5521985237650?text=Oi!%20Vim%20pela%20p%C3%A1gina%20da%20Genos%20e%20quero%20destravar%20minha%20cl%C3%ADnica.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Genos: comercial estruturado para clínicas de implantodontia" },
+      { title: "Exclusivo para clínicas" },
       {
         name: "description",
         content:
