@@ -1,15 +1,46 @@
-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
-// or the app will break with duplicate plugins:
-//   - tanstackStart, viteReact, tailwindcss, tsConfigPaths, cloudflare (build-only),
-//     componentTagger (dev-only), VITE_* env injection, @ path alias, React/TanStack dedupe,
-//     error logger plugins, and sandbox detection (port/host/strictPort).
-// You can pass additional config via defineConfig({ vite: { ... } }) if needed.
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { defineConfig } from "vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import viteReact from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import tsConfigPaths from "vite-tsconfig-paths";
 
-// Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-// @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.
-export default defineConfig({
-  tanstackStart: {
-    server: { entry: "server" },
-  },
+// Ordem dos plugins importa: tailwind e os path aliases precisam vir antes do
+// TanStack Start, e o plugin do React sempre por último.
+// O nitro só entra no build — é ele que empacota a app como Worker do Cloudflare
+// (preset cloudflare-module) e gera o .output/ que o wrangler publica.
+export default defineConfig(async ({ command }) => {
+  const plugins = [
+    tailwindcss(),
+    tsConfigPaths({ projects: ["./tsconfig.json"] }),
+    tanstackStart({
+      server: { entry: "server" },
+      importProtection: {
+        behavior: "error",
+        client: {
+          files: ["**/server/**"],
+          specifiers: ["server-only"],
+        },
+      },
+    }),
+  ];
+
+  if (command === "build") {
+    const { nitro } = await import("nitro/vite");
+    plugins.push(nitro({ preset: "cloudflare-module" }));
+  }
+
+  plugins.push(viteReact());
+
+  return {
+    plugins,
+    optimizeDeps: {
+      include: [
+        "react",
+        "react-dom",
+        "react-dom/client",
+        "react/jsx-runtime",
+        "react/jsx-dev-runtime",
+      ],
+    },
+  };
 });

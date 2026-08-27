@@ -67,23 +67,32 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const SITE_URL = "https://clinicas.genosgroup.com.br";
+const OG_IMAGE_PATH = "/og-image.png";
+const SITE_DESCRIPTION =
+  "Sua clínica não precisa de mais pacientes. Precisa fechar os que já chegam. A Genos integra marketing e comercial para transformar avaliações em protocolos fechados e faturamento previsível.";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Landing page for implantodontists to create predictable revenue and organized operations." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Landing page for implantodontists to create predictable revenue and organized operations." },
+      { title: "Genos: Sistema Reabilita" },
+      { name: "description", content: SITE_DESCRIPTION },
+      { name: "author", content: "Genos Group" },
+      { property: "og:site_name", content: "Genos Group" },
+      { property: "og:locale", content: "pt_BR" },
+      { property: "og:title", content: "Genos: Sistema Reabilita" },
+      { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "Landing page for implantodontists to create predictable revenue and organized operations." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5b4eabae-df22-4a94-9316-137a8b182106/id-preview-d5c79969--a7f9a673-31fc-4a65-8444-de42d80d66b2.lovable.app-1779736864040.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5b4eabae-df22-4a94-9316-137a8b182106/id-preview-d5c79969--a7f9a673-31fc-4a65-8444-de42d80d66b2.lovable.app-1779736864040.png" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: `${SITE_URL}${OG_IMAGE_PATH}` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Genos: Sistema Reabilita" },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+      { name: "twitter:image", content: `${SITE_URL}${OG_IMAGE_PATH}` },
     ],
     links: [
       {
