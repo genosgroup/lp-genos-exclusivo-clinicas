@@ -191,9 +191,9 @@ const founders = [
     foto: gilvanFoto,
     nome: "Gilvan Brito",
     pos: "center 20%",
-    scale: 1,
+    scale: 1.15,
     texto:
-      "Mais de uma década no comercial. Treinou mais de 5.000 vendedores e liderou equipes de mais de 600 pessoas. É ele quem senta com você: organiza os processos, alinha e motiva a equipe e põe o comercial da clínica pra funcionar.",
+      "Mais de uma década no comercial, com mais de 5.000 vendedores treinados e equipes de mais de 600 pessoas lideradas. Atua diretamente na gestão, processos e vendas, identificando gargalos e estruturando a operação para gerar crescimento, eficiência e previsibilidade.",
   },
   {
     foto: thalitaFoto,
