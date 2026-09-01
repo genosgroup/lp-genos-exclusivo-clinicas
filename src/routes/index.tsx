@@ -198,8 +198,8 @@ const founders = [
   {
     foto: thalitaFoto,
     nome: "Thalita Azeredo",
-    pos: "center 15%",
-    scale: 1.18,
+    pos: "center 10%",
+    scale: 1.55,
     texto:
       "Publicitária de formação, acelerou dezenas de negócios em 3 continentes na última década. Vê o que ninguém para pra ver, e como isso faz um negócio crescer ou travar. É ela quem traz a visão estratégica que dá a direção.",
   },
