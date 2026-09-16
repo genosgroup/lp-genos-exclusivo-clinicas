@@ -114,6 +114,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+const GA_ID = "G-X2G6KW4TNY";
+
+/* Google Analytics. Mesma propriedade e mesmo fluxo da página /avaliacao, de
+   propósito: as duas vivem no mesmo domínio, e quem vê esta LP e depois vai
+   para o diagnóstico tem que contar como UMA sessão. Fluxos separados
+   transformariam essa pessoa em duas visitas de duas origens, e o anúncio que
+   pagou pela primeira perderia o crédito pela segunda.
+
+   O content_group é o que separa as duas nos relatórios. É dimensão nativa do
+   GA4: não precisa ser registrada em Definições personalizadas. */
+const GA_CONTENT_GROUP = "LP · Exclusivo Clínicas";
+
+const gaScript = `window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date());
+gtag('config','${GA_ID}',{content_group:'${GA_CONTENT_GROUP}'});`;
+
 const META_PIXEL_ID = "624880005754303";
 
 const metaPixelScript = `!function(f,b,e,v,n,t,s)
@@ -132,6 +149,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+        <script dangerouslySetInnerHTML={{ __html: gaScript }} />
         <script dangerouslySetInnerHTML={{ __html: metaPixelScript }} />
         <noscript
           dangerouslySetInnerHTML={{
