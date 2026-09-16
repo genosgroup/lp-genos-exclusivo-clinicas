@@ -43,14 +43,29 @@ export const Route = createFileRoute("/")({
 
 function CtaButton({
   note,
+  local = "sem-posicao",
   className = "",
   variant = "default",
 }: {
   note?: string;
+  /* Onde este CTA está na página. Vai junto com o evento, e é o que responde
+     quanto a pessoa precisou ler antes de clicar. Com três botões idênticos,
+     sem isso o relatório diz que houve conversão e não diz de onde. */
+  local?: string;
   className?: string;
   variant?: "default" | "inverted";
 }) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    /* Métrica não pode quebrar tela nem segurar o clique: se a tag estiver
+       bloqueada por bloqueador de anúncio, o redirecionamento segue igual. */
+    try {
+      const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+      if (typeof gtag === "function") {
+        gtag("event", "whatsapp_clicado", { local });
+      }
+    } catch {
+      /* silêncio proposital */
+    }
     const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
     if (typeof fbq === "function") {
       fbq("track", "Lead");
@@ -406,7 +421,7 @@ function Index() {
             </div>
 
             <div className="fade-up delay-4 mt-10">
-              <CtaButton note="Uma conversa pra entender a sua clínica antes de qualquer proposta." />
+              <CtaButton local="topo" note="Uma conversa pra entender a sua clínica antes de qualquer proposta." />
             </div>
           </div>
         </div>
@@ -538,7 +553,7 @@ function Index() {
         </div>
 
         <div className="mt-16 flex flex-col items-center">
-          <CtaButton />
+          <CtaButton local="meio" />
         </div>
       </section>
 
@@ -587,7 +602,7 @@ function Index() {
             <span className="text-ember">faturamento previsível</span>. Vamos conversar.
           </p>
           <div className="mt-12">
-            <CtaButton />
+            <CtaButton local="fim" />
           </div>
         </div>
       </section>
