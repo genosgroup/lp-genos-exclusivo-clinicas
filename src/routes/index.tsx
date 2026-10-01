@@ -68,7 +68,12 @@ function CtaButton({
     }
     const fbq = (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq;
     if (typeof fbq === "function") {
-      fbq("track", "Lead");
+      /* Contact, não Lead. Clicar no WhatsApp não é entregar contato: a pessoa
+         ainda pode não mandar mensagem nenhuma. Enquanto isto mandava Lead, o
+         mesmo pixel recebia Lead de duas coisas diferentes — formulário
+         preenchido com telefone na /avaliacao, clique simples aqui — e a Meta
+         aprendia a buscar quem clica em vez de quem converte. */
+      fbq("track", "Contact");
     }
     // Defer redirect slightly to let the pixel beacon fire
     e.preventDefault();
