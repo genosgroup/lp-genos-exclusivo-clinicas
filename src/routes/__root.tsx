@@ -144,9 +144,13 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 fbq('init', '${META_PIXEL_ID}');
 fbq('track', 'PageView');`;
 
+/* O lang é pt-BR, não o "en" que vem do boilerplate do TanStack. Declarar inglês
+   numa página em português não quebra nada — e foi por isso que ficou meses assim:
+   o Google pode servir a página para a busca errada, o leitor de tela lê português
+   com fonética inglesa, e o navegador oferece traduzir para quem já fala o idioma. */
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
